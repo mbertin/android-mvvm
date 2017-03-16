@@ -1,0 +1,23 @@
+ext{
+    flavors = {
+        server {
+            dimension "env"
+        }
+
+        mock {
+            dimension "env"
+        }
+
+        com {
+            dimension "country"
+            buildConfigField "String", "GLOBAL_BASE_URL", "\"https://betclicstage.com/a/sv/dev/ServiceAllGlobalApi/api/\""
+            buildConfigField "String", "UNIVERSE_BASE_URL", "\"https://betclicstage.com/a/sv/dev/ServiceAllSportApi/api/\""
+        }
+
+        portugal {
+            dimension "country"
+            buildConfigField "String", "GLOBAL_BASE_URL", "\"https://betclicstage.pt/a/sv/dev/ServiceAllGlobalApi/api/\""
+            buildConfigField "String", "UNIVERSE_BASE_URL", "\"https://betclicstage.pt/a/sv/dev/ServiceAllSportApi/api/\""
+        }
+    }
+}

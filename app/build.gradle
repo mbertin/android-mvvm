@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'realm-android'
+
+apply from: './gradle_config/flavors.gradle'
+apply from: './gradle_config/dependencies.gradle'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+    defaultConfig {
+        applicationId "com.betclic.archimvp"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+
+        versionCode 1
+        versionName "1.0.0.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+
+        debug {
+            debuggable true
+            applicationIdSuffix ".debug"
+
+            buildConfigField "boolean", "isProd", "false"
+        }
+
+        stage1 {
+            buildConfigField "boolean", "isProd", "false"
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "boolean", "isProd", "true"
+        }
+    }
+
+    flavorDimensions "env", "country"
+    productFlavors flavors
+
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        textReport true
+        textOutput 'stdout'
+        ignore 'InvalidPackage'
+    }
+}
+
